@@ -5,14 +5,19 @@ require recipes-kernel/linux/linux-yocto.inc
 
 # Override SRC_URI in a copy of this recipe to point at a different source
 # tree if you do not want to build from Linus' tree.
-SRC_URI = "git://https://github.com/maemo-leste/lime2-linux.git;branch=linux-4.18.y"
+SRC_URI = "git://github.com/maemo-leste/lime2-linux.git;branch=linux-4.18.y;protocol=https"
+#SRC_URI = "git://https://github.com/maemo-leste/lime2-linux.git;protocol=https"
 
 LINUX_VERSION ?= "4.18"
-SRCREV_machine="8b3baaeed9adf1f2ac229e63fd2f29d85612844b"
+SRCREV = "8b3baaeed9adf1f2ac229e63fd2f29d85612844b"
 
-FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
-SRC_URI += "files://defconfig"
+#FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
+#SRC_URI += "files://defconfig"
 
 # Override COMPATIBLE_MACHINE to include your machine in a copy of this recipe
 # file. Leaving it empty here ensures an early explicit build failure.
-COMPATIBLE_MACHINE = "qemux86|qemux86-64"
+COMPATIBLE_MACHINE = "sun8i-a33-tablet"
+
+KCONFIG_MODE = "--alldefconfig"
+KBUILD_DEFCONFIG = "defconfig"
+
