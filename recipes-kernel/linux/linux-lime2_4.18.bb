@@ -9,15 +9,22 @@ SRC_URI = "git://github.com/maemo-leste/lime2-linux.git;branch=linux-4.18.y;prot
 #SRC_URI = "git://https://github.com/maemo-leste/lime2-linux.git;protocol=https"
 
 LINUX_VERSION ?= "4.18"
-SRCREV = "8b3baaeed9adf1f2ac229e63fd2f29d85612844b"
+SRCREV = "86e014f514f979312cae23a15284cb81d1ee7336"
 
-#FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
-#SRC_URI += "files://defconfig"
+FILESEXTRAPATHS:prepend := "${THISDIR}/files:"
+SRC_URI += "file://defconfig"
 
-# Override COMPATIBLE_MACHINE to include your machine in a copy of this recipe
-# file. Leaving it empty here ensures an early explicit build failure.
 COMPATIBLE_MACHINE = "sun8i-a33-tablet"
+CONFIG_SRC := "${THISDIR}"
 
-KCONFIG_MODE = "--alldefconfig"
-KBUILD_DEFCONFIG = "defconfig"
+#do_unpack_append(){
+#    bb.build.exec_func('install_defconfig', d)
+#}
 
+#install_defconfig(){ 
+#    cp ${THISDIR}/files/defconfig ${S}/arch/${ARCH}/configs/
+#}
+
+#KCONFIG_MODE = "--alldefconfig"
+#KBUILD_DEFCONFIG = "defconfig"
+#KBUILD_DEFCONFIG_KMACHINE ?= defconfig_file
